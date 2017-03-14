@@ -63,7 +63,6 @@
 		<project.name>${project.artifactId}</project.name>
 
 		<!-- Maven Plugin Properties -->
-		<maven.plugin.buildnumber.version>1.4</maven.plugin.buildnumber.version>
 		<tomcat.manager.url>http://localhost:8080/manager</tomcat.manager.url>
 		<tomcat.manager.server.id>tomcat.manager</tomcat.manager.server.id>
 	</properties>
@@ -206,7 +205,7 @@
 				<plugin>
 					<groupId>org.codehaus.mojo</groupId>
 					<artifactId>buildnumber-maven-plugin</artifactId>
-					<version>${maven.plugin.buildnumber.version}</version>
+					<version>1.4</version>
 					<executions>
 						<execution>
 							<phase>validate</phase>
@@ -640,6 +639,11 @@
 			<dependency>
 				<groupId>org.springframework</groupId>
 				<artifactId>spring-web</artifactId>
+				<version>${org.springframework.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-websocket</artifactId>
 				<version>${org.springframework.version}</version>
 			</dependency>
 			<dependency>
