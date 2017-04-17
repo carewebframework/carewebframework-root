@@ -322,7 +322,7 @@
 					<version>3.0.2</version>
 					<executions>
 						<execution>
-							<id>copy-resources</id>
+							<id>copy-webjar-resources</id>
 							<phase>process-resources</phase>
 							<goals>
 								<goal>copy-resources</goal>
@@ -350,6 +350,7 @@
 							<configuration>
 								<skipMerge>true</skipMerge>
 								<yuiNoMunge>true</yuiNoMunge>
+								<closureCompilationLevel>WHITESPACE_ONLY</closureCompilationLevel>
 								<closureLanguageIn>ECMASCRIPT5_STRICT</closureLanguageIn>
 								<webappSourceDir>${basedir}/src/main/webjar</webappSourceDir>
 								<webappTargetDir>
@@ -369,6 +370,7 @@
 								<jsSourceExcludes>
 									<jsSourceExclude>**/*.min.js</jsSourceExclude>
 								</jsSourceExcludes>
+								<jsEngine>CLOSURE</jsEngine>
 							</configuration>
 							<phase>process-resources</phase>
 							<goals>
