@@ -53,6 +53,8 @@
 		<jackson.version>2.6.7</jackson.version>
 		<servlet.api.version>3.1.0</servlet.api.version>
 		<java.version>1.8</java.version>
+		<node.version>v7.9.0</node.version>
+		<npm.version>4.2.0</npm.version>
 
 		<!--Necessary for passing credentials. Need respective server defined in 
 			settings.xml -->
@@ -499,6 +501,33 @@
 							</goals>
 						</execution>
 					</executions>
+				</plugin>
+				<!-- NPM / Node plugin -->
+				<plugin>
+				    <groupId>com.github.eirslett</groupId>
+				    <artifactId>frontend-maven-plugin</artifactId>
+				    <version>1.4</version>
+					<executions>
+						<execution>
+						    <id>npm setup</id>
+						    <goals>
+						    	<goal>install-node-and-npm</goal>
+						    </goals>
+						    <configuration>
+						    	<nodeVersion>${node.version}</nodeVersion>
+						    	<npmVersion>${npm.version}</npmVersion>
+						    </configuration>
+						</execution>
+						<execution>
+						    <id>npm install</id>
+						    <goals>
+						        <goal>npm</goal>
+						    </goals>
+						    <configuration>
+							  	<srcdir>${basedir}</srcdir>
+						    </configuration>
+						</execution>
+					</executions>				
 				</plugin>
 			</plugins>
 		</pluginManagement>
