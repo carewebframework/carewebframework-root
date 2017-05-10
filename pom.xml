@@ -61,7 +61,7 @@
 		<project.scm.id>github</project.scm.id>
 		<scm.scm>scm:git</scm.scm>
 		<scm.root>https://github.com/carewebframework</scm.root>
-		<scm.parent>carewebframework-core</scm.parent>
+		<scm.parent>carewebframework-root</scm.parent>
 		<scm.base>${scm.root}/${scm.parent}</scm.base>
 		<project.name>${project.artifactId}</project.name>
 
@@ -905,11 +905,6 @@
 			<dependency>
 				<groupId>org.carewebframework</groupId>
 				<artifactId>org.carewebframework.ui.core</artifactId>
-				<version>${org.carewebframework.core.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>org.carewebframework</groupId>
-				<artifactId>org.carewebframework.ui.thymeleaf</artifactId>
 				<version>${org.carewebframework.core.version}</version>
 			</dependency>
 			<dependency>
