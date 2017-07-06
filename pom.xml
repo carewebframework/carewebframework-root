@@ -77,6 +77,10 @@
 		<tag>HEAD</tag>
 	</scm>
 
+	<modules>
+		<module>org.carewebframework.common</module>
+	</modules>
+	
 	<distributionManagement>
 		<repository>
 			<id>sonatype</id>
