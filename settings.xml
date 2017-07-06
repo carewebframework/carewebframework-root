@@ -20,7 +20,7 @@
         <profile>
             <id>sign</id>
             <activation>
-                <activeByDefault>true</activeByDefault>
+                <activeByDefault>false</activeByDefault>
             </activation>
             <properties>
                 <gpg.executable>gpg</gpg.executable>

@@ -1,7 +1,7 @@
 language: java
 jdk:
 - oraclejdk8
-script: mvn -V -B -s settings.xml clean deploy -P !build-extras
+script: mvn -V -B -s settings.xml clean deploy
 before_install:
 - chmod +x ./before-install.sh
 - ./before-install.sh
