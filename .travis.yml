@@ -3,7 +3,7 @@ jdk:
 - oraclejdk8
 script: mvn -V -B -s settings.xml clean deploy
 before_install:
- - ./cd/before-install.sh
+ - sudo ./cd/before-install.sh
 env:
   global:
   - secure: AR7D+Lsb2Wm4TSr8uvky2tPTvIXEdCL6kiiu8rTaV8PEeOf+dMDgLtiA73uxvaopo5L75jIbK5BlgclurJvQvhBu3rHvvWm+qQPm8h3GB7FTgnpXjqIdsw7KsxnUkUdAmxIHRPljkQ3mdTX6kFdvDeOrOzcMSHLYdA7v8+N6MTEZ6XfWduGq90oIh9VufT3jCyiPWbNCraMelrNxo/hV/sYC14S/DtChiMu/zJQtuMrgTDr/OQwo8UnSKlFB+h9Agl/hXZ0+uGc74YfLkz6qa8aLk99cSNJTHK16CKsU2byFUOla1H2r0u40ziFZxIzo9Neeu7Ta7K9xUKXIy2QlFCghX1RDHBAI1ldOUjz6o/iACBbtf9x1Xn5BNfqiP8o34jHXONXt2AQSg2LraTnk3crGxi8V1Z5nUWP+mjqiaeZkC2X+N6yUEySPdisGhayZOrJtSUmv+nTrdy+L0aBIH2KfAu5uu3XwinshTz0FS/D0qrwzrnyNILKKU0SwSnyK2uHXO620ZybXmnSDLyF5sumT7EbxTuuiP4ogfAFwpy9NdufMSLtHxxASsom25wdN+np4n5ltnIypHWINivHwOdg+a4y5rxz9FFiPnAn++zWvJI5p4suWn8B1d9oU/sGCHimGY3WKgLddPFNEEIY5DMAhETEfleGu3N84iVA5Lfs=
