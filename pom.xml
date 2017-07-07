@@ -61,8 +61,8 @@
 	</properties>
 
 	<scm>
-		<connection>scm:git:git://github.com/carewebframework/carewebframework-root</connection>
-		<developerConnection>scm:git:git://github.com/carewebframework/carewebframework-root</developerConnection>
+		<connection>scm:git:https://github.com/carewebframework/carewebframework-root</connection>
+		<developerConnection>scm:git:https://github.com/carewebframework/carewebframework-root</developerConnection>
 		<url>https://github.com/carewebframework/carewebframework-root</url>
 		<tag>HEAD</tag>
 	</scm>
