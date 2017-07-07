@@ -59,10 +59,6 @@
 		<!--Necessary for passing credentials. Need respective server defined in 
 			settings.xml -->
 		<project.scm.id>github</project.scm.id>
-		<scm.scm>scm:git</scm.scm>
-		<scm.root>https://github.com/carewebframework</scm.root>
-		<scm.parent>carewebframework-root</scm.parent>
-		<scm.base>${scm.root}/${scm.parent}</scm.base>
 		<project.name>${project.artifactId}</project.name>
 
 		<!-- Maven Plugin Properties -->
@@ -71,9 +67,9 @@
 	</properties>
 
 	<scm>
-		<connection>${scm.scm}:${scm.base}</connection>
-		<developerConnection>${scm.scm}:${scm.base}</developerConnection>
-		<url>${scm.base}</url>
+		<connection>scm:git:git://github.com/carewebframework/carewebframework-root</connection>
+		<developerConnection>>scm:git:git://github.com/carewebframework/carewebframework-root</developerConnection>
+		<url>>https://github.com/carewebframework/carewebframework-root</url>
 		<tag>HEAD</tag>
 	</scm>
 
