@@ -78,8 +78,7 @@ public class JSONUtil {
         public TypeDeserializer buildTypeDeserializer(DeserializationConfig config, JavaType baseType,
                                                       Collection<NamedType> subtypes) {
             return noTypeInfo(baseType) ? null
-                    : new AsPropertyTypeDeserializer(baseType, _customIdResolver, _typeProperty, _typeIdVisible,
-                            baseType.getRawClass());
+                    : new AsPropertyTypeDeserializer(baseType, _customIdResolver, _typeProperty, _typeIdVisible, baseType);
         }
 
         @Override
@@ -107,10 +106,7 @@ public class JSONUtil {
 
         private JavaType baseType;
 
-        private final ObjectMapper mapper;
-
-        protected CWTypedIdResolver(ObjectMapper mapper) {
-            this.mapper = mapper;
+        protected CWTypedIdResolver() {
         }
 
         @Override
@@ -131,11 +127,6 @@ public class JSONUtil {
         @Override
         public String idFromBaseType() {
             return findId(baseType.getRawClass());
-        }
-
-        @Override
-        public JavaType typeFromId(String id) {
-            return typeFromId(mapper.getTypeFactory(), id);
         }
 
         @Override
@@ -163,6 +154,11 @@ public class JSONUtil {
         @Override
         public Id getMechanism() {
             return Id.CUSTOM;
+        }
+        
+        @Override
+        public String getDescForKnownTypeIds() {
+            return "CWTypeResolverBuilder";
         }
     }
 
@@ -224,7 +220,7 @@ public class JSONUtil {
             if (mapper == null) {
                 mapper = new ObjectMapper();
                 TypeResolverBuilder<?> typer = new CWTypeResolverBuilder();
-                typer = typer.init(JsonTypeInfo.Id.CUSTOM, new CWTypedIdResolver(mapper));
+                typer = typer.init(JsonTypeInfo.Id.CUSTOM, new CWTypedIdResolver());
                 typer = typer.inclusion(JsonTypeInfo.As.PROPERTY);
                 typer = typer.typeProperty(typeProperty);
                 mapper.setDefaultTyping(typer);
