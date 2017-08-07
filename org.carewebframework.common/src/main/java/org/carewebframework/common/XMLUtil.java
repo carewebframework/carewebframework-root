@@ -30,6 +30,7 @@ import java.io.InputStream;
 import java.io.StringWriter;
 import java.nio.charset.StandardCharsets;
 
+import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.OutputKeys;
@@ -42,19 +43,42 @@ import org.apache.commons.io.IOUtils;
 import org.w3c.dom.Document;
 import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
+import org.xml.sax.InputSource;
 
 public class XMLUtil {
-
+    
     public enum TagFormat {
         OPENING, CLOSING, BOTH, EMPTY
     }
-    
-    private static final DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory.newInstance();
 
+    private static final DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory.newInstance();
+    
     static {
         try {
+            documentBuilderFactory.setNamespaceAware(true);
             documentBuilderFactory.setFeature("http://apache.org/xml/features/nonvalidating/load-external-dtd", false);
         } catch (ParserConfigurationException e) {}
+    }
+
+    /**
+     * Returns a new document builder instance.
+     *
+     * @return New document builder instance.
+     * @throws ParserConfigurationException Parser configuration error.
+     */
+    public static DocumentBuilder newDocumentBuilder() throws ParserConfigurationException {
+        return documentBuilderFactory.newDocumentBuilder();
+    }
+
+    /**
+     * Parses XML from an input source.
+     *
+     * @param source An input source containing valid XML.
+     * @return XML document.
+     * @throws Exception Unspecified exception.
+     */
+    public static Document parseXMLFromSource(InputSource source) throws Exception {
+        return newDocumentBuilder().parse(source);
     }
     
     /**
@@ -67,7 +91,7 @@ public class XMLUtil {
     public static Document parseXMLFromString(String xml) throws Exception {
         return parseXMLFromStream(IOUtils.toInputStream(xml, StandardCharsets.UTF_8));
     }
-
+    
     /**
      * Parses XML from a list of strings.
      *
@@ -78,7 +102,7 @@ public class XMLUtil {
     public static Document parseXMLFromList(Iterable<String> xml) throws Exception {
         return parseXMLFromString(StrUtil.fromList(xml));
     }
-
+    
     /**
      * Parses XML from a file.
      *
@@ -89,7 +113,7 @@ public class XMLUtil {
     public static Document parseXMLFromLocation(String filePath) throws Exception {
         return parseXMLFromStream(new FileInputStream(filePath));
     }
-
+    
     /**
      * Parses XML from an input stream.
      *
@@ -98,11 +122,11 @@ public class XMLUtil {
      * @throws Exception Unspecified exception.
      */
     public static Document parseXMLFromStream(InputStream stream) throws Exception {
-        Document document = documentBuilderFactory.newDocumentBuilder().parse(stream);
+        Document document = newDocumentBuilder().parse(stream);
         stream.close();
         return document;
     }
-
+    
     /**
      * Converts an XML document to a formatted XML string.
      *
@@ -112,7 +136,7 @@ public class XMLUtil {
     public static String toString(Document doc) {
         return toString(doc, 4);
     }
-
+    
     /**
      * Converts an XML document to a formatted XML string.
      *
@@ -124,19 +148,19 @@ public class XMLUtil {
         if (doc == null) {
             return "";
         }
-
+        
         try {
             DOMSource domSource = new DOMSource(doc);
             StringWriter writer = new StringWriter();
             StreamResult result = new StreamResult(writer);
             TransformerFactory tf = TransformerFactory.newInstance();
-
+            
             try {
                 tf.setAttribute("indent-number", indent);
             } catch (IllegalArgumentException e) {
                 // Ignore if not supported.
             }
-
+            
             Transformer transformer = tf.newTransformer();
             transformer.setOutputProperty(OutputKeys.OMIT_XML_DECLARATION, "yes");
             transformer.setOutputProperty(OutputKeys.INDENT, "yes");
@@ -147,7 +171,7 @@ public class XMLUtil {
             throw MiscUtil.toUnchecked(e);
         }
     }
-
+    
     /**
      * Returns the formatted name for the node.
      *
@@ -157,20 +181,20 @@ public class XMLUtil {
      */
     public static String formatNodeName(Node node, TagFormat format) {
         StringBuilder sb = new StringBuilder((format == TagFormat.CLOSING ? "</" : "<") + node.getNodeName());
-
+        
         if (format != TagFormat.CLOSING) {
             sb.append(formatAttributes(node));
         }
-
+        
         sb.append(format == TagFormat.EMPTY ? " />" : ">");
-
+        
         if (format == TagFormat.BOTH) {
             sb.append(formatNodeName(node, TagFormat.CLOSING));
         }
-
+        
         return sb.toString();
     }
-
+    
     /**
      * Returns formatted attributes of the node.
      *
@@ -180,15 +204,15 @@ public class XMLUtil {
     public static String formatAttributes(Node node) {
         StringBuilder sb = new StringBuilder();
         NamedNodeMap attrs = node.getAttributes();
-
+        
         for (int i = 0; i < attrs.getLength(); i++) {
             Node attr = attrs.item(i);
             sb.append(' ').append(attr.getNodeName()).append("= '").append(attr.getNodeValue()).append("'");
         }
-
+        
         return sb.toString();
     }
-
+    
     /**
      * Enforce static class.
      */
