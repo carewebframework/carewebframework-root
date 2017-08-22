@@ -552,6 +552,12 @@
 
 	<dependencyManagement>
 		<dependencies>
+			<!-- CWF Common Library -->
+			<dependency>
+				<groupId>org.carewebframework</groupId>
+				<artifactId>org.carewebframework.common</artifactId>
+				<version>6.0.2-SNAPSHOT</version>
+			</dependency>
 			<!-- Spring Framework -->
 			<dependency>
 				<groupId>org.springframework</groupId>
