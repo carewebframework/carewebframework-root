@@ -3,7 +3,7 @@
 
 	<groupId>org.carewebframework</groupId>
 	<artifactId>org.carewebframework-root</artifactId>
-	<version>6.0.2-SNAPSHOT</version>
+	<version>6.0.2</version>
 	<packaging>pom</packaging>
 	<name>CareWeb Framework Root POM</name>
 	<description>CareWeb Framework Root POM</description>
@@ -64,7 +64,7 @@
 		<connection>scm:git:https://github.com/carewebframework/carewebframework-root</connection>
 		<developerConnection>scm:git:https://github.com/carewebframework/carewebframework-root</developerConnection>
 		<url>https://github.com/carewebframework/carewebframework-root</url>
-		<tag>HEAD</tag>
+		<tag>6.0.2</tag>
 	</scm>
 
 	<modules>
@@ -556,7 +556,7 @@
 			<dependency>
 				<groupId>org.carewebframework</groupId>
 				<artifactId>org.carewebframework.common</artifactId>
-				<version>6.0.2-SNAPSHOT</version>
+				<version>6.0.2</version>
 			</dependency>
 			<!-- Spring Framework -->
 			<dependency>
